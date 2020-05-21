@@ -1,0 +1,13 @@
+{
+    "name": "yomon/framework",
+    "description": "the small php framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "galat",
+            "email": "972402873@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
