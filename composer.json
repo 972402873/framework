@@ -9,6 +9,11 @@
         }
     ],
     "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Illuminate\\": "src/Illuminate/"
+        }
+    },
     "require": {
         "illuminate/database": "5.5.*"
     }
