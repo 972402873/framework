@@ -3,6 +3,7 @@
 namespace Yomon\Foundation\Http;
 
 use Exception;
+use NoahBuscher\Macaw\Macaw;
 use Throwable;
 use Yomon\Contracts\Http\Kernel as KernelContract;
 use Yomon\Foundation\Application;
@@ -29,8 +30,8 @@ class Kernel implements KernelContract
      * @var array
      */
     protected $bootstrappers = [
-       /* \Yomon\Foundation\Bootstrap\LoadEnvironmentVariables::class,
-        \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
+       \Yomon\Foundation\Bootstrap\LoadEnvironmentVariables::class,
+        /* \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
         \Yomon\Foundation\Bootstrap\HandleExceptions::class,
         \Yomon\Foundation\Bootstrap\RegisterFacades::class,
         \Yomon\Foundation\Bootstrap\RegisterProviders::class,
@@ -115,6 +116,7 @@ class Kernel implements KernelContract
 
             $response = $this->sendRequestThroughRouter($request);
         } catch (Exception $e) {
+         echo "<pre>";print_r($e);die();
             $this->reportException($e);
 
             $response = $this->renderException($request, $e);
@@ -176,7 +178,7 @@ class Kernel implements KernelContract
 
 //            return $this->router->dispatch($request);
             require BASE_PATH.'/config/routes.php';
-            $request->response->return = \Route::dispatch();
+            $request->response->return = Macaw::dispatch();;
             return $request->response;
         };
     }
