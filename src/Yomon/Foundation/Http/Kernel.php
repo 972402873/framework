@@ -30,14 +30,13 @@ class Kernel implements KernelContract
      * @var array
      */
     protected $bootstrappers = [
-       \Yomon\Foundation\Bootstrap\LoadEnvironmentVariables::class,
+        \Yomon\Foundation\Bootstrap\LoadEnvironmentVariables::class,
         \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
+        \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
+        \Yomon\Foundation\Bootstrap\HandleExceptions::class,
         \Yomon\Foundation\Bootstrap\RegisterFacades::class,
         \Yomon\Foundation\Bootstrap\RegisterProviders::class,
-        /* \Yomon\Foundation\Bootstrap\HandleExceptions::class,
-        \Yomon\Foundation\Bootstrap\RegisterFacades::class,
-        \Yomon\Foundation\Bootstrap\RegisterProviders::class,
-        \Yomon\Foundation\Bootstrap\BootProviders::class,*/
+        \Yomon\Foundation\Bootstrap\BootProviders::class,
     ];
 
     /**
@@ -113,21 +112,22 @@ class Kernel implements KernelContract
      */
     public function handle($request)
     {
-        try {
+        $response = $this->sendRequestThroughRouter($request);
+        /*try {
             //$request->enableHttpMethodParameterOverride();
 
             $response = $this->sendRequestThroughRouter($request);
         } catch (Exception $e) {
-         echo "<pre>";print_r($e);die();
-            $this->reportException($e);
+         //echo "<pre>";print_r($e);die();
+            //$this->reportException($e);
 
-            $response = $this->renderException($request, $e);
+            //$response = $this->renderException($request, $e);
         } catch (Throwable $e) {
-            echo "<pre>";print_r($e);die();
+            //echo "<pre>";print_r($e);die();
             //$this->reportException($e = new FatalThrowableError($e));
 
             //$response = $this->renderException($request, $e);
-        }
+        }*/
 
         /*$this->app['events']->dispatch(
             new Events\RequestHandled($request, $response)
