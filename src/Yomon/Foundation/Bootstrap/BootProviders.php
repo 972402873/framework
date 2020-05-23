@@ -2,14 +2,14 @@
 
 namespace Yomon\Foundation\Bootstrap;
 
-use Yomon\Contracts\Foundation\Application;
+use Yomon\Foundation\Application;
 
 class BootProviders
 {
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Yomon\Foundation\Application  $app
      * @return void
      */
     public function bootstrap(Application $app)

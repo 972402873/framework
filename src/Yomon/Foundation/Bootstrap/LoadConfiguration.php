@@ -63,9 +63,9 @@ class LoadConfiguration
     {
         $files = $this->getConfigurationFiles($app);
 
-        /*if (! isset($files['app'])) {
+        if (! isset($files['app'])) {
             throw new Exception('Unable to load the "app" configuration file.');
-        }*/
+        }
 
         foreach ($files as $key => $path) {
             $repository->set($key, require $path);
@@ -83,21 +83,21 @@ class LoadConfiguration
         $files = [];
 
         $configPath = realpath($app->configPath());
-        $configExt  = $app->getConfigExt();
+        //$configExt  = $app->getConfigExt();
 
-        $files = $this->getDirAllFiles($configPath, $configExt);
+        //$files = $this->getDirAllFiles($configPath, $configExt);
 
-        /*foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
+        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
             $directory = $this->getNestedDirectory($file, $configPath);
 
             $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
-        }*/
+        }
 
         ksort($files, SORT_NATURAL);
 
         return $files;
     }
-    protected function getDirAllFiles($path, $ext){
+    /*protected function getDirAllFiles($path, $ext){
         if (!is_dir($path)) return false;
         $scandir = scandir($path);
         $files = [];
@@ -117,7 +117,7 @@ class LoadConfiguration
 
         }
         return $files;
-    }
+    }*/
 
     /**
      * Get the configuration file nesting path.

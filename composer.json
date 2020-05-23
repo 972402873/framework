@@ -20,8 +20,11 @@
     "require": {
         "illuminate/database": "5.5.*",
         "illuminate/filesystem": "5.5.*",
-        "filp/whoops": "^2.6@dev",
         "noahbuscher/macaw": "dev-master",
-        "vlucas/phpdotenv": "~2.2"
+        "vlucas/phpdotenv": "~2.2",
+        "symfony/var-dumper": "3.4.40"
+    },
+    "require-dev": {
+        "filp/whoops": "2.7.2"
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
-use Illuminate\Container\Container;
+use Yomon\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\UrlGenerator;

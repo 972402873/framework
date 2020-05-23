@@ -4,6 +4,7 @@ namespace Yomon\Foundation;
 
 use Closure;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\ServiceProvider;
 use RuntimeException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -58,7 +59,7 @@ class Application extends Container
     protected $bootedCallbacks = [];
 
     /**
-     * 
+     * 配置后缀
      * @var string
      */
     protected $configExt = '.php';
@@ -1111,8 +1112,8 @@ class Application extends Container
                      //'config'               => [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],
 //                     'cookie'               => [\Illuminate\Cookie\CookieJar::class, \Illuminate\Contracts\Cookie\Factory::class, \Illuminate\Contracts\Cookie\QueueingFactory::class],
 //                     'encrypter'            => [\Illuminate\Encryption\Encrypter::class, \Illuminate\Contracts\Encryption\Encrypter::class],
-//                     'db'                   => [\Illuminate\Database\DatabaseManager::class],
-//                     'db.connection'        => [\Illuminate\Database\Connection::class, \Illuminate\Database\ConnectionInterface::class],
+                     'db'                   => [\Illuminate\Database\DatabaseManager::class],
+                     'db.connection'        => [\Illuminate\Database\Connection::class, \Illuminate\Database\ConnectionInterface::class],
 //                     'events'               => [\Illuminate\Events\Dispatcher::class, \Illuminate\Contracts\Events\Dispatcher::class],
 //                     'files'                => [\Illuminate\Filesystem\Filesystem::class],
 //                     'filesystem'           => [\Illuminate\Filesystem\FilesystemManager::class, \Illuminate\Contracts\Filesystem\Factory::class],
@@ -1191,7 +1192,7 @@ class Application extends Container
         throw new RuntimeException('Unable to detect application namespace.');
     }
     /**
-     * ��ȡ���ú�׺
+     * 获取配置后缀
      * @access public
      * @return string
      */
