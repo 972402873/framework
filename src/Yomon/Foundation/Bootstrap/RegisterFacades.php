@@ -1,18 +1,18 @@
 <?php
 
-namespace Illuminate\Foundation\Bootstrap;
+namespace Yomon\Foundation\Bootstrap;
 
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Foundation\PackageManifest;
-use Illuminate\Contracts\Foundation\Application;
+use Yomon\Foundation\AliasLoader;
+use Yomon\Foundation\Facade;
+//use Illuminate\Foundation\PackageManifest;
+use Yomon\Foundation\Application;
 
 class RegisterFacades
 {
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Yomon\Foundation\Application  $app
      * @return void
      */
     public function bootstrap(Application $app)
@@ -21,9 +21,10 @@ class RegisterFacades
 
         Facade::setFacadeApplication($app);
 
-        AliasLoader::getInstance(array_merge(
+        AliasLoader::getInstance($app->make('config')->get('app.aliases', []))->register();
+        /*AliasLoader::getInstance(array_merge(
             $app->make('config')->get('app.aliases', []),
-            $app->make(PackageManifest::class)->aliases()
-        ))->register();
+        //$app->make(PackageManifest::class)->aliases()
+        ))->register();*/
     }
 }

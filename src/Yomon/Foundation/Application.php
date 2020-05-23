@@ -57,6 +57,12 @@ class Application extends Container
     protected $bootedCallbacks = [];
 
     /**
+     * 配置后缀
+     * @var string
+     */
+    protected $configExt = '.php';
+
+    /**
      * The array of terminating callbacks.
      *
      * @var array
@@ -138,11 +144,11 @@ class Application extends Container
             $this->setBasePath($basePath);
         }
 
-    $this->registerBaseBindings();
+        $this->registerBaseBindings();
 
-    //$this->registerBaseServiceProviders();
+        $this->registerBaseServiceProviders();
 
-     //$this->registerCoreContainerAliases();
+        $this->registerCoreContainerAliases();
   }
 
     /**
@@ -541,10 +547,10 @@ class Application extends Container
     {
         $providers = Collection::make($this->config['app.providers'])
                         ->partition(function ($provider) {
-                            return Str::startsWith($provider, 'Illuminate\\');
+                            return Str::startsWith($provider, 'Yomon\\');
                         });
 
-        $providers->splice(1, 0, [$this->make(PackageManifest::class)->providers()]);
+        //$providers->splice(1, 0, [$this->make(PackageManifest::class)->providers()]);
 
         (new ProviderRepository($this, new Filesystem, $this->getCachedServicesPath()))
                     ->load($providers->collapse()->toArray());
@@ -1182,5 +1188,14 @@ class Application extends Container
         }
 
         throw new RuntimeException('Unable to detect application namespace.');
+    }
+    /**
+     * 获取配置后缀
+     * @access public
+     * @return string
+     */
+    public function getConfigExt()
+    {
+        return $this->configExt;
     }
 }

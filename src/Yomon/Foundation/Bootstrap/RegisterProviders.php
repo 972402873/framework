@@ -1,15 +1,15 @@
 <?php
 
-namespace Illuminate\Foundation\Bootstrap;
+namespace Yomon\Foundation\Bootstrap;
 
-use Illuminate\Contracts\Foundation\Application;
+use Yomon\Foundation\Application;
 
 class RegisterProviders
 {
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Yomon\Foundation\Application  $app
      * @return void
      */
     public function bootstrap(Application $app)

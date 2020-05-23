@@ -1,20 +1,19 @@
 <?php
 
-namespace Illuminate\Foundation\Bootstrap;
+namespace Yomon\Foundation\Bootstrap;
 
 use Exception;
 use SplFileInfo;
-use Illuminate\Config\Repository;
+use Yomon\Config\Repository;
 use Symfony\Component\Finder\Finder;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Config\Repository as RepositoryContract;
+use Yomon\Foundation\Application;
 
 class LoadConfiguration
 {
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Yomon\Foundation\Application  $app
      * @return void
      */
     public function bootstrap(Application $app)
@@ -42,6 +41,7 @@ class LoadConfiguration
         // Finally, we will set the application's environment based on the configuration
         // values that were loaded. We will pass a callback which will be used to get
         // the environment in a web context where an "--env" switch is not present.
+
         $app->detectEnvironment(function () use ($config) {
             return $config->get('app.env', 'production');
         });
@@ -54,18 +54,18 @@ class LoadConfiguration
     /**
      * Load the configuration items from all of the files.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Config\Repository  $repository
+     * @param  \Yomon\Foundation\Application  $app
+     * @param  \Yomon\Config\Repository  $repository
      * @return void
      * @throws \Exception
      */
-    protected function loadConfigurationFiles(Application $app, RepositoryContract $repository)
+    protected function loadConfigurationFiles(Application $app, Repository $repository)
     {
         $files = $this->getConfigurationFiles($app);
 
-        if (! isset($files['app'])) {
+        /*if (! isset($files['app'])) {
             throw new Exception('Unable to load the "app" configuration file.');
-        }
+        }*/
 
         foreach ($files as $key => $path) {
             $repository->set($key, require $path);
@@ -75,7 +75,7 @@ class LoadConfiguration
     /**
      * Get all of the configuration files for the application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Yomon\Foundation\Application  $app
      * @return array
      */
     protected function getConfigurationFiles(Application $app)
@@ -83,15 +83,39 @@ class LoadConfiguration
         $files = [];
 
         $configPath = realpath($app->configPath());
+        $configExt  = $app->getConfigExt();
 
-        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
+        $files = $this->getDirAllFiles($configPath, $configExt);
+
+        /*foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
             $directory = $this->getNestedDirectory($file, $configPath);
 
             $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
-        }
+        }*/
 
         ksort($files, SORT_NATURAL);
 
+        return $files;
+    }
+    protected function getDirAllFiles($path, $ext){
+        if (!is_dir($path)) return false;
+        $scandir = scandir($path);
+        $files = [];
+        foreach ($scandir as $file) {
+            if (is_dir($path.DIRECTORY_SEPARATOR.$file) && $file != '.' && $file != '..'){
+                $children = $this->getDirAllFiles($path.DIRECTORY_SEPARATOR.$file,$ext);
+                foreach ($children as $k => $child){
+                    $files[$file.'.'.$k] = $child;
+                }
+            }else{
+                if ('.' . pathinfo($file, PATHINFO_EXTENSION) === $ext) {
+                    $basename = basename($file, '.php');
+
+                    $files[$basename] = $path.DIRECTORY_SEPARATOR.$file;
+                }
+            }
+
+        }
         return $files;
     }
 

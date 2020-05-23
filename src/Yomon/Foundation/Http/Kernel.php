@@ -31,8 +31,10 @@ class Kernel implements KernelContract
      */
     protected $bootstrappers = [
        \Yomon\Foundation\Bootstrap\LoadEnvironmentVariables::class,
-        /* \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
-        \Yomon\Foundation\Bootstrap\HandleExceptions::class,
+        \Yomon\Foundation\Bootstrap\LoadConfiguration::class,
+        \Yomon\Foundation\Bootstrap\RegisterFacades::class,
+        \Yomon\Foundation\Bootstrap\RegisterProviders::class,
+        /* \Yomon\Foundation\Bootstrap\HandleExceptions::class,
         \Yomon\Foundation\Bootstrap\RegisterFacades::class,
         \Yomon\Foundation\Bootstrap\RegisterProviders::class,
         \Yomon\Foundation\Bootstrap\BootProviders::class,*/
@@ -177,7 +179,10 @@ class Kernel implements KernelContract
             $this->app->instance('request', $request);
 
 //            return $this->router->dispatch($request);
-            require BASE_PATH.'/config/routes.php';
+            $routeFiles = $this->app->configPath("routes.php");
+
+//            require BASE_PATH.'/config/routes.php';
+            require  $routeFiles;
             $request->response->return = Macaw::dispatch();;
             return $request->response;
         };
