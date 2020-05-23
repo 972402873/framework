@@ -3,6 +3,7 @@
 namespace Yomon\Foundation;
 
 use Closure;
+use Illuminate\Filesystem\Filesystem;
 use RuntimeException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -57,7 +58,7 @@ class Application extends Container
     protected $bootedCallbacks = [];
 
     /**
-     * ≈‰÷√∫Û◊∫
+     * 
      * @var string
      */
     protected $configExt = '.php';

@@ -8,9 +8,9 @@ use LogicException;
 use ReflectionClass;
 use ReflectionParameter;
 use Yomon\Contracts\Container\BindingResolutionException;
-use Yomon\Container\Container as ContainerContract;
+use Yomon\Contracts\Container\Container as ContainerContract;
 
-class Container implements ArrayAccess
+class Container implements ArrayAccess,ContainerContract
 {
     /**
      * The current globally available container (if any).

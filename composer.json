@@ -10,6 +10,9 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
+        "files": [
+            "src/Yomon/Foundation/helpers.php",
+        ],
         "psr-4": {
             "Yomon\\": "src/Yomon/"
         }

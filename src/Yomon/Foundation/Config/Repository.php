@@ -1,6 +1,6 @@
 <?php
 
-namespace Yomon\Config;
+namespace Yomon\Foundation\Config;
 
 use ArrayAccess;
 use Illuminate\Support\Arr;

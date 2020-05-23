@@ -4,7 +4,7 @@ namespace Yomon\Foundation\Bootstrap;
 
 use Exception;
 use SplFileInfo;
-use Yomon\Config\Repository;
+use Yomon\Foundation\Config\Repository;
 use Symfony\Component\Finder\Finder;
 use Yomon\Foundation\Application;
 
