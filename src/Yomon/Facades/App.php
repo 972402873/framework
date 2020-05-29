@@ -17,7 +17,7 @@ use Yomon\Foundation\Facade;
  * @method static void booted(mixed $callback)
  * @method static string getCachedServicesPath()
  *
- * @see \Illuminate\Foundation\Application
+ * @see \Yomon\Foundation\Application
  */
 class App extends Facade
 {

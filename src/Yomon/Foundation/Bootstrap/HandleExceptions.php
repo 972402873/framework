@@ -26,7 +26,7 @@ class HandleExceptions
         $this->app = $app;
 
         if (! $app->environment('testing')) {
-            ini_set('display_errors', 'Off');
+            //ini_set('display_errors', 'Off');
         }
 
         if (config('app.debug') && class_exists(Whoops::class)){

@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
 use Yomon\Container\Container;
 use Yomon\Contracts\Http\Kernel as HttpKernelContract;
 use Yomon\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Yomon\Providers\RoutingServiceProvider;
 
 class Application extends Container
 {
@@ -192,7 +193,7 @@ class Application extends Container
 
         //$this->register(new LogServiceProvider($this));
 
-        //$this->register(new RoutingServiceProvider($this));
+        $this->register(new RoutingServiceProvider($this));
     }
 
     /**
@@ -1131,7 +1132,7 @@ class Application extends Container
 //                     'redirect'             => [\Illuminate\Routing\Redirector::class],
 //                     'redis'                => [\Illuminate\Redis\RedisManager::class, \Illuminate\Contracts\Redis\Factory::class],
 //                     'request'              => [\Illuminate\Http\Request::class, \Symfony\Component\HttpFoundation\Request::class],
-//                     'router'               => [\Illuminate\Routing\Router::class, \Illuminate\Contracts\Routing\Registrar::class, \Illuminate\Contracts\Routing\BindingRegistrar::class],
+                     'router'               => [\Yomon\Routing\Router::class],//[\Illuminate\Routing\Router::class, \Illuminate\Contracts\Routing\Registrar::class, \Illuminate\Contracts\Routing\BindingRegistrar::class],
 //                     'session'              => [\Illuminate\Session\SessionManager::class],
 //                     'session.store'        => [\Illuminate\Session\Store::class, \Illuminate\Contracts\Session\Session::class],
 //                     'url'                  => [\Illuminate\Routing\UrlGenerator::class, \Illuminate\Contracts\Routing\UrlGenerator::class],
